@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!--
+- This file configures the roles (user groups)
+- and permissions for accessing the system.
+-->
+<config>
+    <!--
+    - Setup roles here.
+    - Use the 'inheritFrom' tag to
+    - inherit permissions from another role.
+    -->
+    <roleSet>   
+        <role>
+            <name>customer</name>
+        </role>
+        <role>
+            <name>employee</name>
+            <inheritFrom>customer</inheritFrom>
+        </role>
+        <role>
+            <name>manager</name>
+            <inheritFrom>employee</inheritFrom>
+        </role>
+    </roleSet>
+ 
+    <!--
+    - Set permissions for accessing application components here.
+    - resource -> property being access controlled.
+    - role -> group or user that can access resource.
+    - privilege -> privilege that role can use with resource.
+    -
+    - Each permission tag can contain multiple
+    - resources, roles, and privileges.
+    -->
+    <permissions>
+        <permission>
+            <resources>
+                <resource>contact_details</resource>
+                <resource>profile</resource>
+            </resources>
+            <roles>
+                <role>customer</role>
+            </roles>
+            <privileges>
+                <privilege>read</privilege>
+                <privilege>write</privilege>
+            </privileges>
+        </permission>
+ 
+        <permission>
+            <resources>
+                <resource>time_card</resource>
+            </resources>
+ 
+            <roles>
+                <role>employee</role>
+            </roles>
+            <privileges>
+                <privilege>read</privilege>
+                <privilege>write</privilege>
+            </privileges>
+        </permission>
+         
+        <permission>
+            <resources>
+                <resource>time_card</resource>
+            </resources>
+            <roles>
+                <role>manager</role>
+            </roles>
+            <privileges>
+                <privilege>approve</privilege>
+            </privileges>
+        </permission>
+ 
+    </permissions>
+</config>
